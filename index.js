@@ -17,24 +17,24 @@ module.exports = function Abnormalitytester(mod) {
     });
 
     mod.command.add('abstart', (id) => {
-        ids = parseInt((id.replace(/\D+/g, '')), 10);
+        ids = Number.parseInt((id.replace(/\D+/g, '')), 10);
             abbegin(ids);
             mod.command.message('Attempted to start abnormality ' + ids + '.');
     });
 
     mod.command.add('abend', (id) => {
-        ids = parseInt((id.replace(/\D+/g, '')), 10);
+        ids = Number.parseInt((id.replace(/\D+/g, '')), 10);
             abend(ids);
             mod.command.message('Attempted to end abnormality ' + ids + '.');
     });
 
     mod.command.add('abduration', (id) => {
-        mod.settings.duration = parseInt((id.replace(/\D+/g, '')), 10);
+        mod.settings.duration = Number.parseInt((id.replace(/\D+/g, '')), 10);
             mod.command.message('Abnormality duration set to ' + mod.settings.duration + '.');
     });
 
     mod.command.add('abstack', (id) => {
-        mod.settings.stack = parseInt((id.replace(/\D+/g, '')), 10);
+        mod.settings.stack = Number.parseInt((id.replace(/\D+/g, '')), 10);
             mod.command.message('Abnormality stacks set to ' + mod.settings.stack + '.');
     });
 
