@@ -18,24 +18,36 @@ module.exports = function Abnormalitytester(mod) {
 
     mod.command.add('abstart', (id) => {
         ids = Number.parseInt((id.replace(/\D+/g, '')), 10);
-            abbegin(ids);
-            mod.command.message('Attempted to start abnormality ' + ids + '.');
+        abbegin(ids);
+        mod.command.message('Attempted to start abnormality ' + ids + '.');
+        if (isNaN(ids)) {
+            mod.command.message('Please enter an valid abnormality id.');
+        }
     });
 
     mod.command.add('abend', (id) => {
         ids = Number.parseInt((id.replace(/\D+/g, '')), 10);
-            abend(ids);
-            mod.command.message('Attempted to end abnormality ' + ids + '.');
+        abend(ids);
+        mod.command.message('Attempted to end abnormality ' + ids + '.');
+        if (isNaN(ids)) {
+            mod.command.message('Please enter an valid abnormality id.');
+        }
     });
 
     mod.command.add('abduration', (id) => {
         mod.settings.duration = Number.parseInt((id.replace(/\D+/g, '')), 10);
-            mod.command.message('Abnormality duration set to ' + mod.settings.duration + '.');
+        mod.command.message('Abnormality duration set to ' + mod.settings.duration + '.');
+        if (isNaN(ids)) {
+            mod.command.message('Please enter an valid duration number.');
+        }
     });
 
     mod.command.add('abstack', (id) => {
         mod.settings.stack = Number.parseInt((id.replace(/\D+/g, '')), 10);
-            mod.command.message('Abnormality stacks set to ' + mod.settings.stack + '.');
+        mod.command.message('Abnormality stacks set to ' + mod.settings.stack + '.');
+        if (isNaN(ids)) {
+            mod.command.message('Please enter an valid stack number.');
+        }
     });
 
     function abbegin(iden) {
