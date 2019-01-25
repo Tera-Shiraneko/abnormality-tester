@@ -20,11 +20,12 @@ module.exports = function Abnormalitytester(mod) {
         ids = Number.parseInt((id.replace(/\D+/g, '')), 10);
         abbegin(ids);
         mod.command.message('Attempted to start abnormality ' + ids + '.');
-        if (isNaN(ids)) {
+        if (Number.isNaN(ids) || ids === 0) {
             mod.command.message('Please enter an valid abnormality id.');
         }
         if (!mod.settings.enabled) {
-            mod.command.message('Please activate the module first.');
+            mod.settings.enabled = true;
+            mod.command.message('Module got activated for you please retype the command again.');
         }
     });
 
@@ -32,32 +33,35 @@ module.exports = function Abnormalitytester(mod) {
         ids = Number.parseInt((id.replace(/\D+/g, '')), 10);
         abend(ids);
         mod.command.message('Attempted to end abnormality ' + ids + '.');
-        if (isNaN(ids)) {
+        if (Number.isNaN(ids) || ids === 0) {
             mod.command.message('Please enter an valid abnormality id.');
         }
         if (!mod.settings.enabled) {
-            mod.command.message('Please activate the module first.');
+            mod.settings.enabled = true;
+            mod.command.message('Module got activated for you please retype the command again.');
         }
     });
 
     mod.command.add('abduration', (id) => {
         mod.settings.duration = Number.parseInt((id.replace(/\D+/g, '')), 10);
         mod.command.message('Abnormality duration set to ' + mod.settings.duration + '.');
-        if (isNaN(mod.settings.duration)) {
-            mod.command.message('Please enter an valid duration number.');
+        if (Number.isNaN(mod.settings.duration) || mod.settings.duration === 0 || mod.settings.duration < 10000) {
+            mod.settings.duration = 600000;
+            mod.command.message('Default settings applied please enter an valid duration number.');
         }
     });
 
     mod.command.add('abstack', (id) => {
         mod.settings.stack = Number.parseInt((id.replace(/\D+/g, '')), 10);
         mod.command.message('Abnormality stacks set to ' + mod.settings.stack + '.');
-        if (isNaN(mod.settings.stack)) {
-            mod.command.message('Please enter an valid stack number.');
+        if (Number.isNaN(mod.settings.stack) || mod.settings.stack === 0) {
+            mod.settings.stack = 1;
+            mod.command.message('Default settings applied please enter an valid stack number.');
         }
     });
 
     function abbegin(iden) {
-        if (!mod.settings.enabled) return;
+        if (!mod.settings.enabled || iden === 0 || mod.settings.duration === 0 || mod.settings.duration < 10000 || mod.settings.stack === 0) return;
         mod.send('S_ABNORMALITY_BEGIN', 3, {
             target: mod.game.me.gameId,
             source: mod.game.me.gameId,
@@ -71,7 +75,7 @@ module.exports = function Abnormalitytester(mod) {
     }
 
     function abend(iden) {
-        if (!mod.settings.enabled) return;
+        if (!mod.settings.enabled || iden === 0 || mod.settings.duration === 0 || mod.settings.duration < 10000 || mod.settings.stack === 0) return;
         mod.send('S_ABNORMALITY_END', 1, {
             target: mod.game.me.gameId,
             id: iden
