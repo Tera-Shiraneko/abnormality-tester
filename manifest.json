@@ -1,0 +1,13 @@
+{
+    "files": {
+        "Readme.md": "72573fba42626f089ba6e1058db39db597901c7556bbfecd8f73d970a5304627",
+        "index.js": "2ea7280f296cbdec21a0b24082e93ff746b5906aa8b18a538d740c7fdb2feed4",
+        "module.json": "9575e48a8ad95e1844a964621c4f915f9c3c5e38b1c2071f213cf4b3c6a9d36c",
+        "settings_migrator.js": "c4c38804528ab0a229d7ac29a9a39d4d97c7fc16c8f5a9a50cf3818668aaced5",
+        "settings_structure.js": "d288472ec7216f6f34db91a7e5bf7122f58149c907d47fd69d8e36806fa89675"
+    },
+    "defs": {
+        "S_ABNORMALITY_BEGIN": 3,
+        "S_ABNORMALITY_END": 1
+    }
+}
