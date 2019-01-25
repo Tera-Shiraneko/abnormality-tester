@@ -2,13 +2,17 @@
 
 ---
 
-## Command
+## Console Command
 - Type `/8 abnormalitytester` to enable or disable the module default is enabled.
-    - If using "Caalis Tera Proxy" in gui mode you can additionaly set up stacks and duration.
 - Type `/8 abstart + id` to start an abnormality an list of ids can be found in abnormalinfo section.
 - Type `/8 abduration + ms` to configure the abnormality duration in milliseconds default is ten minutes.
 - Type `/8 abend + id` to end the triggered abnormality should be the same as the one you started before.
 - Type `/8 abstack + stacks` to configure the amount of stacks you want to be shown default is one stack.
+
+---
+
+## Interface Command
+- Type `/8 abnormalitytester` to enable or disable the module and set up stacks and duration.
 
 ---
 
