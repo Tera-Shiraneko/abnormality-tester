@@ -69,7 +69,7 @@ module.exports = function Abnormalitytester(mod) {
     });
 
     function abbegin(iden) {
-        if (iden === 0 || mod.settings.duration === 0 || mod.settings.duration < 10000 || mod.settings.stack === 0) return;
+        if (!mod.settings.enabled || iden === 0 || mod.settings.duration === 0 || mod.settings.duration < 10000 || mod.settings.stack === 0) return;
         mod.send('S_ABNORMALITY_BEGIN', 3, {
             target: mod.game.me.gameId,
             source: mod.game.me.gameId,
@@ -83,7 +83,7 @@ module.exports = function Abnormalitytester(mod) {
     }
 
     function abend(iden) {
-        if (iden === 0 || mod.settings.duration === 0 || mod.settings.duration < 10000 || mod.settings.stack === 0) return;
+        if (!mod.settings.enabled || iden === 0 || mod.settings.duration === 0 || mod.settings.duration < 10000 || mod.settings.stack === 0) return;
         mod.send('S_ABNORMALITY_END', 1, {
             target: mod.game.me.gameId,
             id: iden
