@@ -30,6 +30,11 @@ module.exports = function Abnormalitytester(mod) {
             mod.settings.enabled = true;
             mod.command.message('Module got activated for you please retype the command again.');
         }
+        if (mod.settings.duration === 0 || mod.settings.duration < 10000 || mod.settings.stack === 0) {
+            mod.settings.duration = 610000;
+            mod.settings.stack = 1;
+            mod.command.message('You manually edited the config file with invalid settings default settings will be applied.');
+        }
     });
 
     mod.command.add('abend', (id) => {
@@ -49,7 +54,7 @@ module.exports = function Abnormalitytester(mod) {
         mod.settings.duration = Number.parseInt((id.replace(/\D+/g, '')), 10);
         mod.command.message('Abnormality duration set to ' + mod.settings.duration + '.');
         if (Number.isNaN(mod.settings.duration) || mod.settings.duration === 0 || mod.settings.duration < 10000) {
-            mod.settings.duration = 600000;
+            mod.settings.duration = 610000;
             mod.command.message('Default settings applied please enter an valid duration number.');
         }
     });
@@ -64,7 +69,7 @@ module.exports = function Abnormalitytester(mod) {
     });
 
     function abbegin(iden) {
-        if (!mod.settings.enabled || iden === 0 || mod.settings.duration === 0 || mod.settings.duration < 10000 || mod.settings.stack === 0) return;
+        if (iden === 0 || mod.settings.duration === 0 || mod.settings.duration < 10000 || mod.settings.stack === 0) return;
         mod.send('S_ABNORMALITY_BEGIN', 3, {
             target: mod.game.me.gameId,
             source: mod.game.me.gameId,
@@ -78,7 +83,7 @@ module.exports = function Abnormalitytester(mod) {
     }
 
     function abend(iden) {
-        if (!mod.settings.enabled || iden === 0 || mod.settings.duration === 0 || mod.settings.duration < 10000 || mod.settings.stack === 0) return;
+        if (iden === 0 || mod.settings.duration === 0 || mod.settings.duration < 10000 || mod.settings.stack === 0) return;
         mod.send('S_ABNORMALITY_END', 1, {
             target: mod.game.me.gameId,
             id: iden

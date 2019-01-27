@@ -1,7 +1,7 @@
 const DefaultSettings = {
     "stack": 1,
     "enabled": true,
-    "duration": 600000,
+    "duration": 610000,
 }
 
 module.exports = function MigrateSettings(from_ver, to_ver, settings) {
