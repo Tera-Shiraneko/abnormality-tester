@@ -42,13 +42,13 @@ module.exports = function Abnormalitytester(mod) {
         let ids = Number.parseInt((id.replace(/\D+/g, '')), 10);
         let duration = dur != null ? Number.parseInt((dur.replace(/\D+/g, '')), 10) : mod.settings.duration;
         let stacks = st != null ? Number.parseInt((st.replace(/\D+/g, '')), 10) : mod.settings.stack;
-        mod.command.message('Attempted to start abnormality ${ids} with: ${duration/1000}s duration and ${stacks} stacks.');
+        mod.command.message(`Attempted to start abnormality ${ids} with: ${duration/1000}s duration and ${stacks} stacks.`);
         abbegin(ids, duration, stacks);
     });
 
     mod.command.add('abend', (id) => {
         let ids = Number.parseInt((id.replace(/\D+/g, '')), 10);
-        mod.command.message('Attempted to end abnormality ${ids}.');
+        mod.command.message(`Attempted to end abnormality ${ids}.`);
         abend(ids);
     });
 
@@ -58,7 +58,7 @@ module.exports = function Abnormalitytester(mod) {
             mod.command.message('Invalid setting please set an valid duration number.');
             return;
         }
-        mod.command.message('Abnormality duration set to ${mod.settings.duration}.');
+        mod.command.message(`Abnormality duration set to ${mod.settings.duration/1000}.`);
     });
 
     mod.command.add('abstack', (id) => {
@@ -67,11 +67,11 @@ module.exports = function Abnormalitytester(mod) {
             mod.command.message('Invalid setting please set an valid stack number.');
             return;
         }
-        mod.command.message('Abnormality stacks set to ${mod.settings.stack}.');
+        mod.command.message(`Abnormality stacks set to ${mod.settings.stack}.`);
     });
 
-    function abbegin(id, duration, stack) {
-        if (id === 0) {
+    function abbegin(abstartid, duration, stack) {
+        if (abstartid === 0) {
             mod.command.message('Please enter an valid abnormality id.');
             return;
         }
@@ -86,7 +86,7 @@ module.exports = function Abnormalitytester(mod) {
         mod.send('S_ABNORMALITY_BEGIN', 3, {
             target: mod.game.me.gameId,
             source: mod.game.me.gameId,
-            id: id,
+            id: abstartid,
             duration: duration,
             unk: 0,
             stacks: stack,
@@ -96,31 +96,38 @@ module.exports = function Abnormalitytester(mod) {
         let timer = setTimeout(() => {
             mod.send('S_ABNORMALITY_END', 1, {
                 target: mod.game.me.gameId,
-                id: id
+                id: abstartid
             });
         }, duration);
-        abnormalitytimers[id] = timer;
+        abnormalitytimers[abstartid] = timer;
     }
 
-    function abend(iden) {
-        if (iden === 0) {
+    function abend(abendid) {
+        if (abendid === 0) {
             mod.command.message('Please enter an valid abnormality id.');
             return;
         }
-        if (abnormalitytimers[iden] !== undefined) {
-            clearTimeout(abnormalitytimers[iden]);
-            delete abnormalitytimers[iden];
+        if (abnormalitytimers[abendid] !== undefined) {
+            clearTimeout(abnormalitytimers[abendid]);
+            delete abnormalitytimers[abendid];
         } else {
-            if (!abnormalityduration(iden) > 0) {
+            if (!abnormalityduration(abendid) > 0) {
                 mod.command.message('You have to trigger the abnormality before ending it.');
                 return;
             }
         }
         mod.send('S_ABNORMALITY_END', 1, {
             target: mod.game.me.gameId,
-            id: iden
+            id: abendid
         });
     }
+
+    mod.game.on('leave_game', () => {
+        for (let i in abnormalitytimers) {
+            clearTimeout(abnormalitytimers[i]);
+        }
+        abnormalitytimers = {};
+    });
 
     let ui = null;
     if (global.TeraProxy.GUIMode) {
