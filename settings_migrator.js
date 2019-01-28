@@ -1,6 +1,5 @@
 const DefaultSettings = {
     "stack": 1,
-    "enabled": true,
     "duration": 610000,
 }
 

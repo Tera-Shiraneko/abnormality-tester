@@ -1,13 +1,14 @@
 {
     "files": {
-        "Readme.md": "72573fba42626f089ba6e1058db39db597901c7556bbfecd8f73d970a5304627",
-        "index.js": "e61bd952d8c32e6ef74c1ca23950e9d19f36dbbf6c2907769a88a2b3e89cd838",
+        "Readme.md": "aa6fe262a1a0738d41ab901f09060720cc46289c74b98e2f6b2a28bc5ae89618",
+        "index.js": "3e0467e8544d4f7981328ab4351554548ee18eb6b03ef59e190a3d565591d76a",
         "module.json": "9575e48a8ad95e1844a964621c4f915f9c3c5e38b1c2071f213cf4b3c6a9d36c",
-        "settings_migrator.js": "191a94416e2388e4f9db4d4dd84880349a6adcc5131cd8bdbd7e28921eb0e973",
-        "settings_structure.js": "6a61fd8962619abbb2fa45afd72ad4492d0523a73e2c54537d18737e2ce025e4"
+        "settings_migrator.js": "d490a54405dd04741ad18a26176e0c5a3fc520c9ac235dd326311a7a47f4db7a",
+        "settings_structure.js": "d11d237ece354c048ee05f102f18072e49688f38dc3d4c9bb03fcf739b84ae05"
     },
     "defs": {
         "S_ABNORMALITY_BEGIN": 3,
-        "S_ABNORMALITY_END": 1
+        "S_ABNORMALITY_END": 1,
+        "S_ABNORMALITY_REFRESH": 1
     }
 }

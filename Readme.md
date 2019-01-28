@@ -3,7 +3,6 @@
 ---
 
 ## Console Command
-- Type `/8 abnormalitytester` to enable or disable the module default is enabled.
 - Type `/8 abstart + id` to start an abnormality an list of ids can be found in abnormalinfo section.
 - Type `/8 abduration + ms` to configure the abnormality duration in milliseconds default is ten minutes.
 - Type `/8 abend + id` to end the triggered abnormality should be the same as the one you started before.
@@ -12,7 +11,7 @@
 ---
 
 ## Interface Command
-- Type `/8 abnormalitytester` to enable or disable the module and set up stacks and duration.
+- Type `/8 abconfig` to set up the stacks and duration via an range slider.
 
 ---
 
