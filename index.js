@@ -55,7 +55,7 @@ module.exports = function Abnormalitytester(mod) {
     mod.command.add('abduration', (id) => {
         mod.settings.duration = Number.parseInt((id.replace(/\D+/g, '')), 10);
         if (mod.settings.duration === 0 || mod.settings.duration < 10000) {
-            mod.command.message('Invalid setting please set an valid duration number.');
+            mod.command.message('Invalid setting please enter an valid duration number.');
             return;
         }
         mod.command.message(`Abnormality duration set to ${mod.settings.duration/1000}s.`);
@@ -64,7 +64,7 @@ module.exports = function Abnormalitytester(mod) {
     mod.command.add('abstack', (id) => {
         mod.settings.stack = Number.parseInt((id.replace(/\D+/g, '')), 10);
         if (mod.settings.stack === 0) {
-            mod.command.message('Invalid setting please set an valid stack number.');
+            mod.command.message('Invalid setting please enter an valid stack number.');
             return;
         }
         mod.command.message(`Abnormality stacks set to ${mod.settings.stack} stacks.`);
@@ -77,11 +77,11 @@ module.exports = function Abnormalitytester(mod) {
         }
         if (duration === 0) {
             duration = mod.settings.duration;
-            mod.command.message('Default duration applied please set an valid duration number next time.');
+            mod.command.message('Default duration applied please enter an valid duration number next time.');
         }
         if (stack === 0) {
             stack = mod.settings.stack;
-            mod.command.message('Default stacks applied please set an valid stack number next time.');
+            mod.command.message('Default stacks applied please enter an valid stack number next time.');
         }
         mod.send('S_ABNORMALITY_BEGIN', 3, {
             target: mod.game.me.gameId,
