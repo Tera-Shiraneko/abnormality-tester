@@ -58,7 +58,7 @@ module.exports = function Abnormalitytester(mod) {
             mod.command.message('Invalid setting please set an valid duration number.');
             return;
         }
-        mod.command.message(`Abnormality duration set to ${mod.settings.duration/1000}.`);
+        mod.command.message(`Abnormality duration set to ${mod.settings.duration/1000}s.`);
     });
 
     mod.command.add('abstack', (id) => {
@@ -67,7 +67,7 @@ module.exports = function Abnormalitytester(mod) {
             mod.command.message('Invalid setting please set an valid stack number.');
             return;
         }
-        mod.command.message(`Abnormality stacks set to ${mod.settings.stack}.`);
+        mod.command.message(`Abnormality stacks set to ${mod.settings.stack} stacks.`);
     });
 
     function abbegin(abstartid, duration, stack) {
