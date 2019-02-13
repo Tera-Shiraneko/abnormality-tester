@@ -15,6 +15,15 @@
 
 ---
 
+## Configuration
+- If you want to edit the config you need to start proxy and go to server selection.
+    - Will be generated afterwards in the modules folder.
+- A list of things that can be edited can be found here only for experienced users.
+	- Stack => Amount of stacks which will be applied.
+    - Duration => Abnormality duration in milliseconds.
+
+---
+
 ## Abnormalinfo
 - [Abnormality Overview](https://github.com/neowutran/TeraDpsMeterData/tree/master/hotdot)
 
