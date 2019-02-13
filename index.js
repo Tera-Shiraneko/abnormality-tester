@@ -17,27 +17,6 @@ module.exports = function Abnormalitytester(mod) {
         }
     });
 
-    mod.hook('S_ABNORMALITY_BEGIN', 3, (event) => {
-        if (mod.game.me.is(event.target))
-            abnormalities[event.id] = Date.now() + event.duration;
-    });
-
-    mod.hook('S_ABNORMALITY_REFRESH', 1, (event) => {
-        if (mod.game.me.is(event.target))
-            abnormalities[event.id] = Date.now() + event.duration;
-    });
-
-    mod.hook('S_ABNORMALITY_END', 1, (event) => {
-        if (mod.game.me.is(event.target))
-            delete abnormalities[event.id];
-    });
-
-    function abnormalityduration(id) {
-        if (!abnormalities[id])
-            return 0;
-        return abnormalities[id] - Date.now();
-    }
-
     mod.command.add('abstart', (id, dur, st) => {
         let ids = Number.parseInt((id.replace(/\D+/g, '')), 10);
         let duration = dur != null ? Number.parseInt((dur.replace(/\D+/g, '')), 10) : mod.settings.duration;
@@ -70,6 +49,27 @@ module.exports = function Abnormalitytester(mod) {
         mod.command.message(`Abnormality stacks set to ${mod.settings.stack} stacks.`);
     });
 
+    mod.hook('S_ABNORMALITY_BEGIN', 3, (event) => {
+        if (mod.game.me.is(event.target))
+            abnormalities[event.id] = Date.now() + event.duration;
+    });
+
+    mod.hook('S_ABNORMALITY_REFRESH', 1, (event) => {
+        if (mod.game.me.is(event.target))
+            abnormalities[event.id] = Date.now() + event.duration;
+    });
+
+    mod.hook('S_ABNORMALITY_END', 1, (event) => {
+        if (mod.game.me.is(event.target))
+            delete abnormalities[event.id];
+    });
+
+    function abnormalityduration(id) {
+        if (!abnormalities[id])
+            return 0;
+        return abnormalities[id] - Date.now();
+    }
+
     function abbegin(abstartid, duration, stack) {
         if (abstartid === 0) {
             mod.command.message('Please enter an valid abnormality id.');
@@ -93,6 +93,7 @@ module.exports = function Abnormalitytester(mod) {
             unk2: 0,
             unk3: 0
         });
+
         let timer = setTimeout(() => {
             mod.send('S_ABNORMALITY_END', 1, {
                 target: mod.game.me.gameId,
