@@ -11,7 +11,7 @@
 ---
 
 ## Interface Command
-- Type `/8 abconfig` to set up the stacks and duration via an range slider.
+- Type `/8 abnormal config` to set up the stacks and duration via an range slider.
 
 ---
 
