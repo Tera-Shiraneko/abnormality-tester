@@ -33,4 +33,5 @@
 ---
 
 ## Note
+- If you are using some kind of proxy module or client mod which blocks abnormalities there won't be any screen effects.
 - The commands should be written without the plus just an space between it.
