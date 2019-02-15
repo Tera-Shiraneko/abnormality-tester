@@ -3,10 +3,10 @@
 ---
 
 ## Console Command
-- Type `/8 abstart + id` to start an abnormality an list of ids can be found in abnormalinfo section.
-- Type `/8 abduration + ms` to configure the abnormality duration in milliseconds default is ten minutes.
-- Type `/8 abend + id` to end the triggered abnormality should be the same as the one you started before.
-- Type `/8 abstack + stacks` to configure the amount of stacks you want to be shown default is one stack.
+- Type `/8 abnormal begin + id` to start an abnormality an list of ids can be found in abnormalinfo section.
+- Type `/8 abnormal end + id` to end the triggered abnormality should be the same as the one you started before.
+- Type `/8 abnormal duration + ms` to configure the abnormality duration in milliseconds default is ten minutes.
+- Type `/8 abnormal stacks + stacks` to configure the amount of stacks you want to be shown default is one stack.
 
 ---
 

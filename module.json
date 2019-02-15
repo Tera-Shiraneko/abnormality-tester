@@ -1,5 +1,5 @@
 {
-    "disableAutoUpdate": false,
+    "disableAutoUpdate": true,
     "name": "Abnormality Tester",
     "author": "Shalltearz",
     "description": "Tera proxy module to test abnormalities clientsided.",

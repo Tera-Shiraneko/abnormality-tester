@@ -8,45 +8,36 @@ module.exports = function Abnormalitytester(mod) {
         mod.warn('It is highly recommended that you download the latest official version from the #proxy channel in http://tiny.cc/caalis-tera-proxy');
     }
 
-    let abnormalitytimers = {};
-    let abnormalities = {};
+    let abnormalitytimers = {},
+        abnormalities = {},
+        value;
 
-    mod.command.add('abconfig', () => {
-        if (ui) {
-            ui.show();
+    mod.command.add('abnormal', (arg_1, arg_2) => {
+        if (arg_1 === 'begin') {
+            value = Number.parseInt(arg_2);
+            mod.command.message(`Attempted to start abnormality ${value} with ${mod.settings.duration/1000} seconds duration and ${mod.settings.stack} stacks.`);
+            abbegin(value);
         }
-    });
-
-    mod.command.add('abstart', (id, dur, st) => {
-        let ids = Number.parseInt((id.replace(/\D+/g, '')), 10);
-        let duration = dur != null ? Number.parseInt((dur.replace(/\D+/g, '')), 10) : mod.settings.duration;
-        let stacks = st != null ? Number.parseInt((st.replace(/\D+/g, '')), 10) : mod.settings.stack;
-        mod.command.message(`Attempted to start abnormality ${ids} with: ${duration/1000}s duration and ${stacks} stacks.`);
-        abbegin(ids, duration, stacks);
-    });
-
-    mod.command.add('abend', (id) => {
-        let ids = Number.parseInt((id.replace(/\D+/g, '')), 10);
-        mod.command.message(`Attempted to end abnormality ${ids}.`);
-        abend(ids);
-    });
-
-    mod.command.add('abduration', (id) => {
-        mod.settings.duration = Number.parseInt((id.replace(/\D+/g, '')), 10);
-        if (mod.settings.duration === 0 || mod.settings.duration < 10000) {
-            mod.command.message('Invalid setting please enter an valid duration number.');
-            return;
+        else if (arg_1 === "end") {
+            value = Number.parseInt(arg_2);
+            mod.command.message(`Attempted to end abnormality ${value}.`);
+            abend(value);
         }
-        mod.command.message(`Abnormality duration set to ${mod.settings.duration/1000}s.`);
-    });
-
-    mod.command.add('abstack', (id) => {
-        mod.settings.stack = Number.parseInt((id.replace(/\D+/g, '')), 10);
-        if (mod.settings.stack === 0) {
-            mod.command.message('Invalid setting please enter an valid stack number.');
-            return;
+        else if (arg_1 === "duration") {
+            value = Number.parseInt(arg_2);
+            mod.settings.duration = value;
+            mod.command.message(`Abnormality duration set to ${mod.settings.duration/1000} seconds.`);
         }
-        mod.command.message(`Abnormality stacks set to ${mod.settings.stack} stacks.`);
+        else if (arg_1 === "stacks") {
+            value = Number.parseInt(arg_2);
+            mod.settings.stack = value;
+            mod.command.message(`Abnormality stacks set to ${mod.settings.stack} stacks.`);
+        }
+        else if (arg_1 === "config") {
+            if (ui) {
+                ui.show();
+            }
+        }
     });
 
     mod.hook('S_ABNORMALITY_BEGIN', 3, (event) => {
@@ -70,26 +61,26 @@ module.exports = function Abnormalitytester(mod) {
         return abnormalities[id] - Date.now();
     }
 
-    function abbegin(abstartid, duration, stack) {
-        if (abstartid === 0) {
+    function abbegin(abstartid) {
+        if (abstartid === 0 || Number.isNaN(abstartid)) {
             mod.command.message('Please enter an valid abnormality id.');
             return;
         }
-        if (duration === 0) {
-            duration = mod.settings.duration;
+        if (mod.settings.duration === 0 || Number.isNaN(mod.settings.duration)) {
+            mod.settings.duration = 610000;
             mod.command.message('Default duration applied please enter an valid duration number next time.');
         }
-        if (stack === 0) {
-            stack = mod.settings.stack;
+        if (mod.settings.stack === 0 || Number.isNaN(mod.settings.stacks)) {
+            mod.settings.stacks = 1;
             mod.command.message('Default stacks applied please enter an valid stack number next time.');
         }
         mod.send('S_ABNORMALITY_BEGIN', 3, {
             target: mod.game.me.gameId,
             source: mod.game.me.gameId,
             id: abstartid,
-            duration: duration,
+            duration: mod.settings.duration,
             unk: 0,
-            stacks: stack,
+            stacks: mod.settings.stack,
             unk2: 0,
             unk3: 0
         });
@@ -99,12 +90,12 @@ module.exports = function Abnormalitytester(mod) {
                 target: mod.game.me.gameId,
                 id: abstartid
             });
-        }, duration);
+        }, mod.settings.duration);
         abnormalitytimers[abstartid] = timer;
     }
 
     function abend(abendid) {
-        if (abendid === 0) {
+        if (abendid === 0 || Number.isNaN(abendid)) {
             mod.command.message('Please enter an valid abnormality id.');
             return;
         }
