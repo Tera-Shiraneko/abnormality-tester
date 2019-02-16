@@ -33,5 +33,5 @@
 ---
 
 ## Note
-- Make sure that you disable every kind of abnormality blocker if no screen effects show up after starting abnormality.
+- Disable every kind of abnormality blocker if no screen effects show up after starting an abnormality.
 - The commands should be written without the plus just an space between it.
