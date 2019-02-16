@@ -33,5 +33,5 @@
 ---
 
 ## Note
-- If you are using some kind of proxy module or client mod which blocks abnormalities there won't be any screen effects.
+- Make sure that you disable every kind of abnormality blocker if no screen effects show up after starting abnormality.
 - The commands should be written without the plus just an space between it.
