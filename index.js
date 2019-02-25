@@ -13,7 +13,7 @@ module.exports = function Abnormalitytester(mod) {
         value;
 
     mod.command.add('abnormal', (arg_1, arg_2) => {
-        if (arg_1 === 'begin') {
+        if (arg_1 === "begin") {
             value = Number.parseInt(arg_2);
             mod.command.message(`Attempted to start abnormality ${value} with ${mod.settings.duration/1000} seconds duration and ${mod.settings.stack} stacks.`);
             abbegin(value);
