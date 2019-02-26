@@ -13,27 +13,27 @@ module.exports = function Abnormalitytester(mod) {
         value;
 
     mod.command.add('abnormal', (arg_1, arg_2) => {
-        if (arg_1 === "begin") {
+        if (arg_1 === 'begin') {
             value = Number.parseInt(arg_2);
             mod.command.message(`Attempted to start abnormality ${value} with ${mod.settings.duration/1000} seconds duration and ${mod.settings.stack} stacks.`);
             abbegin(value);
         }
-        else if (arg_1 === "end") {
+        else if (arg_1 === 'end') {
             value = Number.parseInt(arg_2);
             mod.command.message(`Attempted to end abnormality ${value}.`);
             abend(value);
         }
-        else if (arg_1 === "duration") {
+        else if (arg_1 === 'duration') {
             value = Number.parseInt(arg_2);
             mod.settings.duration = value;
             mod.command.message(`Abnormality duration set to ${mod.settings.duration/1000} seconds.`);
         }
-        else if (arg_1 === "stacks") {
+        else if (arg_1 === 'stacks') {
             value = Number.parseInt(arg_2);
             mod.settings.stack = value;
             mod.command.message(`Abnormality stacks set to ${mod.settings.stack} stacks.`);
         }
-        else if (arg_1 === "config") {
+        else if (arg_1 === 'config') {
             if (ui) {
                 ui.show();
             }
