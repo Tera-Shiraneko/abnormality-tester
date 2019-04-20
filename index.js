@@ -1,6 +1,6 @@
 const SettingsUI = require('tera-mod-ui').Settings;
 
-module.exports = function Abnormalitytester(mod) {
+module.exports = function Abnormality_Tester(mod) {
 
     if (mod.proxyAuthor !== 'caali' || !global.TeraProxy) {
         mod.warn('You are trying to use this module on an unsupported legacy version of tera-proxy.');
@@ -8,7 +8,7 @@ module.exports = function Abnormalitytester(mod) {
         mod.warn('It is highly recommended that you download the latest official version from the #proxy channel in http://tiny.cc/caalis-tera-proxy');
     }
 
-    let abnormalitytimers = {},
+    let abnormality_timers = {},
         abnormalities = {},
         value;
 
@@ -79,10 +79,7 @@ module.exports = function Abnormalitytester(mod) {
             source: mod.game.me.gameId,
             id: abstartid,
             duration: mod.settings.duration,
-            unk: 0,
-            stacks: mod.settings.stack,
-            unk2: 0,
-            unk3: 0
+            stacks: mod.settings.stack
         });
 
         let timer = setTimeout(() => {
@@ -91,7 +88,7 @@ module.exports = function Abnormalitytester(mod) {
                 id: abstartid
             });
         }, mod.settings.duration);
-        abnormalitytimers[abstartid] = timer;
+        abnormality_timers[abstartid] = timer;
     }
 
     function abend(abendid) {
@@ -99,9 +96,9 @@ module.exports = function Abnormalitytester(mod) {
             mod.command.message('Please enter an valid abnormality id.');
             return;
         }
-        if (abnormalitytimers[abendid] !== undefined) {
-            clearTimeout(abnormalitytimers[abendid]);
-            delete abnormalitytimers[abendid];
+        if (abnormality_timers[abendid] !== undefined) {
+            clearTimeout(abnormality_timers[abendid]);
+            delete abnormality_timers[abendid];
         } else {
             if (!abnormalityduration(abendid) > 0) {
                 mod.command.message('You have to trigger the abnormality before ending it.');
@@ -115,10 +112,10 @@ module.exports = function Abnormalitytester(mod) {
     }
 
     mod.game.on('leave_game', () => {
-        for (let i in abnormalitytimers) {
-            clearTimeout(abnormalitytimers[i]);
+        for (let i in abnormality_timers) {
+            clearTimeout(abnormality_timers[i]);
         }
-        abnormalitytimers = {};
+        abnormality_timers = {};
     });
 
     let ui = null;
